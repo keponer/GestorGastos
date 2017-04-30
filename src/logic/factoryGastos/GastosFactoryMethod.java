@@ -5,10 +5,12 @@
  */
 package logic.factoryGastos;
 
+import java.util.Date;
+
 /**
  *
  * @author Alex
  */
 public interface GastosFactoryMethod {
-    public Gasto createGasto(int id, String tipoGasto, double cantidadGasto, String categoriaGasto);
+    public Gasto createGasto(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime);
 }

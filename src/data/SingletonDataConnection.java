@@ -14,13 +14,13 @@ import java.sql.DriverManager;
  */
 public class SingletonDataConnection {
     
-    static Connection con; // atribut per a guardar l’objecte connexió.
+    public Connection con; // atribut per a guardar l’objecte connexió.
     private static SingletonDataConnection INSTANCE = null;
     
     
     //Método constructor que ejecuta el método para conectar con la base de datos
     private SingletonDataConnection() {
-        performConnection();
+        this.performConnection();
     }
     
     //Crea una instancia de la base de datos en caso de no estar creada.
@@ -30,7 +30,8 @@ public class SingletonDataConnection {
         }
     }
     
-    /**Metodo para retorna una instancia de la conexion. Si no esta creada la crea, y si esta creada la retorna
+    /**Metodo para retornar una instancia de SingletonDataConnection.
+     * Si no esta creada la crea, y si esta creada la retorna.
      * @return retorna una instancia de la conexión a la base de datos
      */
     public static SingletonDataConnection getInstance() {
@@ -38,25 +39,31 @@ public class SingletonDataConnection {
         return INSTANCE;
     }
     
+    /** Método para retornar la instancia de la conexión
+     * @return Connection conexión a la base de datos. */
+    public Connection getConnection() {
+        return this.con;
+    }
+    
     //Método para eliminar la instancia de la conexión
     public static void delInstance() {
-        INSTANCE = null;
         closeConnection();
+        INSTANCE = null;
     }
     
     //Método que crea la conexión a la base de datos
     public void performConnection() {
  
         String host = "127.0.0.1";
-        String user = "exampleUser";
-        String pass = "examplePass";
-        String dtbs = "exampleDB";
+        String user = "root";
+        String pass = "";
+        String dtbs = "dds";
  
         try { // preparamos la conexión
             Class.forName("com.mysql.jdbc.Driver");
             String newConnectionURL = "jdbc:mysql://" + host + "/" + dtbs + "?"
                     + "user=" + user + "&password=" + pass;
-            con = DriverManager.getConnection(newConnectionURL);
+            this.con = DriverManager.getConnection(newConnectionURL);
         } catch (Exception e) {
             System.out.println("Error al abrir la conexión.");
         }
@@ -65,7 +72,7 @@ public class SingletonDataConnection {
     //Método para cerrar la conexión con la base de dades
     public static void closeConnection() {
         try {
-            con.close();
+            INSTANCE.getConnection().close();
         } catch (Exception e) {
             System.out.println("Error al cerrar la conexión.");
         }

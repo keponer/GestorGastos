@@ -5,21 +5,22 @@
  */
 package logic.factoryGastos;
 
+import java.util.Date;
+
 /**
  *
  * @author Alex
  */
 public class Impuestos extends Gasto {
 
-    public Impuestos(int id, String tipoGasto, double cantidadGasto) {
-        super(id, tipoGasto, cantidadGasto);
+ public Impuestos(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
+        super(id, concepto, tipo, cantidad, creationTime, updateTime);
     }
 
-    
     @Override
     public double IVA() {
         //21% de IVA 
-        return getCantidadGasto()*0.1735;
+        //return getCantidadGasto()*0.1735;
+        return 0;
     }
-       
 }
