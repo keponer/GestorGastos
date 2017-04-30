@@ -18,10 +18,15 @@ public class Ropa extends Gasto {
     }
 
     @Override
-    public double IVA() {
-        //21% de IVA 
-        //return getCantidadGasto()*0.1735;
-        return 0;
+    public double getIVAPagado() {
+        //21% de getIVAPagado 
+        return getCantidad()*0.1735;
+    }
+
+    @Override
+    public double getSinIVA() {
+        //21% de IVA
+        return getCantidad()*0.8265;
     }
     
 }

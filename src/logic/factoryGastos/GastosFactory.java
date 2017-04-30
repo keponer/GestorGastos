@@ -11,41 +11,40 @@ import java.util.Date;
  *
  * @author Alex
  */
-public class GastosFactory implements GastosFactoryMethod{
+public class GastosFactory{
 
    
-    @Override
     public Gasto createGasto(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
         
-        if      (concepto.equals("Alquiler/Hipoteca")){
+        if      (tipo == 1){
             return new Alquiler_Hipoteca(id, concepto, tipo, cantidad, creationTime, updateTime);
         } 
         
-        else if (concepto.equals("Comida")){
+        else if (tipo == 2){
             return new Comida(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (concepto.equals("Impuesto")){
+        else if (tipo == 3){
             return new Impuestos(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (concepto.equals("Ocio")){
+        else if (tipo == 4){
             return new Ocio(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (concepto.equals("Prestamo")){
+        else if (tipo == 5){
             return new Prestamo(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (concepto.equals("Ropa")){
+        else if (tipo == 6){
             return new Ropa(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (concepto.equals("Salud")){
+        else if (tipo == 7){
             return new Salud(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (concepto.equals("Transporte")){
+        else if (tipo == 8){
             return new Transporte(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
@@ -54,5 +53,7 @@ public class GastosFactory implements GastosFactoryMethod{
         }
     
     }
+    
+    
     
 }

@@ -13,15 +13,20 @@ import java.util.Date;
  */
 public class Prestamo extends Gasto {
 
-   public Prestamo(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
+    public Prestamo(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
         super(id, concepto, tipo, cantidad, creationTime, updateTime);
     }
 
     @Override
-    public double IVA() {
-        //21% de IVA 
+    public double getIVAPagado() {
+        //21% de getIVAPagado 
         //return getCantidadGasto()*0.1735;
         return 0;
+    }
+
+    @Override
+    public double getSinIVA() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

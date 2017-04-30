@@ -79,7 +79,9 @@ public abstract class Gasto {
         this.updateTime = updateTime;
     }
     
-    public abstract double IVA();
+    public abstract double getIVAPagado();
+    
+    public abstract double getSinIVA();
     
     
     
