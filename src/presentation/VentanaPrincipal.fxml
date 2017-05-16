@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="640.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="logic.VentanaPrincipalController">
+   <children>
+      <BorderPane layoutX="19.0" layoutY="3.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Seleccionar todos" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <VBox style="-fx-background-color: #ccc;">
+               <children>
+                  <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </center>
+         <left>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Filtrar" />
+                  <Accordion>
+                    <panes>
+                      <TitledPane text="Fecha">
+                        <content>
+                              <VBox spacing="5.0">
+                                 <children>
+                                    <Label text="Desde:" />
+                                    <DatePicker />
+                                    <Label text="Hasta:" />
+                                    <DatePicker />
+                                 </children>
+                              </VBox>
+                        </content>
+                      </TitledPane>
+                      <TitledPane text="Tipo">
+                        <content>
+                              <VBox spacing="12.0">
+                                 <children>
+                                    <RadioButton mnemonicParsing="false" text="Alquiler / Hipoteca" />
+                                    <RadioButton mnemonicParsing="false" text="Comida" />
+                                    <RadioButton mnemonicParsing="false" text="Impuestos" />
+                                    <RadioButton mnemonicParsing="false" text="Ocio" />
+                                    <RadioButton mnemonicParsing="false" text="Otros" />
+                                    <RadioButton mnemonicParsing="false" text="Préstamo" />
+                                    <RadioButton mnemonicParsing="false" text="Ropa" />
+                                    <RadioButton mnemonicParsing="false" text="Salud" />
+                                    <RadioButton mnemonicParsing="false" text="Transporte" />
+                                 </children>
+                              </VBox>
+                        </content>
+                      </TitledPane>
+                        <TitledPane animated="false" text="Cantidad">
+                           <content>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="12.0">
+                                 <children>
+                                    <Label text="Mínimo: " />
+                                    <TextField prefWidth="80.0" />
+                                    <Label text="Máximo:" />
+                                    <TextField prefWidth="80.0" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                    </panes>
+                  </Accordion>
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>
