@@ -13,18 +13,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import models.CategoriaTransaccion;
-import models.DAO.CategoriaTransaccionDAO;
+import models.CategoriaGasto;
+import models.DAO.CategoriaGastoDAO;
 
 /**
  *
  * @author angel
  */
-public class CategoriaTransaccionDAOJdbc implements CategoriaTransaccionDAO{
-    private CategoriaTransaccion ct;
+public class CategoriaGastoDAOJdbc implements CategoriaGastoDAO{
+    private CategoriaGasto ct;
     private Connection c;
     
-    public CategoriaTransaccionDAOJdbc(Connection c, CategoriaTransaccion ct) {
+    public CategoriaGastoDAOJdbc(Connection c, CategoriaGasto ct) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
    
@@ -71,8 +71,8 @@ public class CategoriaTransaccionDAOJdbc implements CategoriaTransaccionDAO{
      * @return List resultado
      */
     @Override
-    public List<CategoriaTransaccion> getList() {
-        List<CategoriaTransaccion> lista = new ArrayList<>();
+    public List<CategoriaGasto> getList() {
+        List<CategoriaGasto> lista = new ArrayList<>();
         Connection db = SingletonDataConnection.getInstance().getConnection();
         try {
             Statement query = db.createStatement();
@@ -91,8 +91,8 @@ public class CategoriaTransaccionDAOJdbc implements CategoriaTransaccionDAO{
         return lista;
     }
     
-    public static CategoriaTransaccion parseResultRow(ResultSet set) {
-        CategoriaTransaccion cat = new CategoriaTransaccion();
+    public static CategoriaGasto parseResultRow(ResultSet set) {
+        CategoriaGasto cat = new CategoriaGasto();
         try {
             cat.setId(set.getInt(1));
             cat.setName(set.getString(2));

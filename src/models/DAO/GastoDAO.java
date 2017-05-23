@@ -6,14 +6,15 @@
 package models.DAO;
 
 import java.util.List;
-import models.CategoriaTransaccion;
+import controllers.factoryGastos.Gasto;
 
 /**
  *
  * @author angel
  */
-public interface CategoriaTransaccionDAO {
-    public List<CategoriaTransaccion> getList();
+public interface GastoDAO {    
+
+    public List<Gasto> getList();
     
     public int insert();
     

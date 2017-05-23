@@ -3,12 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models;
+package models.DAO;
+
+import java.util.List;
+import models.CategoriaGasto;
+
 
 /**
  *
  * @author angel
  */
-public class Transaccion {
+public interface CategoriaGastoDAO {
+    public List<CategoriaGasto> getList();
     
+    public int insert();
+    
+    public boolean update();
 }

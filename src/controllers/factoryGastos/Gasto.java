@@ -5,7 +5,6 @@
  */
 package controllers.factoryGastos;
 
-import models.DAO.JDBC.TransaccionDAOJdbc;
 import java.util.Date;
 
 /**

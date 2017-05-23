@@ -6,10 +6,10 @@
 package models.DAO;
 
 import java.sql.Connection;
-import models.CategoriaTransaccion;
-import models.DAO.JDBC.CategoriaTransaccionDAOJdbc;
-import models.DAO.JDBC.TransaccionDAOJdbc;
-import models.Transaccion;
+import models.CategoriaGasto;
+import models.DAO.JDBC.CategoriaGastoDAOJdbc;
+import models.DAO.JDBC.GastoDAOJdbc;
+import controllers.factoryGastos.Gasto;
 
 /**
  *
@@ -18,17 +18,17 @@ import models.Transaccion;
 public class DAOFactory {
     private static Connection c;
     
-    public static TransaccionDAO getTransaccionDAO(Transaccion t) {
+    public static GastoDAO getGastoDAO(Gasto t) {
       if (c == null) {
           c = SingletonDataConnection.getInstance().getConnection();
       }
-      return new TransaccionDAOJdbc(c, t);
+      return new GastoDAOJdbc(c, t);
     }
     
-    public static CategoriaTransaccionDAO getCategoriaTransaccionDAO(CategoriaTransaccion ct) {
+    public static CategoriaGastoDAO getCategoriaGastoDAO(CategoriaGasto ct) {
       if (c == null) {
           c = SingletonDataConnection.getInstance().getConnection();
       }
-      return new CategoriaTransaccionDAOJdbc(c, ct);
+      return new CategoriaGastoDAOJdbc(c, ct);
     }
 }
