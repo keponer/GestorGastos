@@ -3,30 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.factoryGastos;
+package models.gastos;
 
 import java.util.Date;
+import models.CategoriaGasto;
 
 /**
  *
  * @author Alex
  */
-public class Ropa extends Gasto {
+public class Alquiler_Hipoteca extends Gasto {
 
-    public Ropa(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
+    public Alquiler_Hipoteca(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime) {
         super(id, concepto, tipo, cantidad, creationTime, updateTime);
     }
 
     @Override
     public double getIVAPagado() {
         //21% de getIVAPagado 
-        return getCantidad()*0.1735;
+        //return getCantidadGasto()*0.1735;
+        return 0;
     }
 
     @Override
     public double getSinIVA() {
-        //21% de IVA
-        return getCantidad()*0.8265;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }

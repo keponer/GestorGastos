@@ -5,8 +5,9 @@
  */
 package models.DAO.JDBC;
 
-import controllers.factoryGastos.Gasto;
-import controllers.factoryGastos.GastosFactory;
+import models.CategoriaGastoCollection;
+import models.gastos.Gasto;
+import models.gastos.GastosFactory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import models.CategoriaGasto;
 import models.DAO.GastoDAO;
 
 /**
@@ -51,12 +53,12 @@ public class GastoDAOJdbc implements GastoDAO{
     }
 
     public static Gasto parseResultRow(ResultSet set) {
-        GastosFactory gf = new GastosFactory();
         Gasto g = null;
         int id, tipo;
         double cantidad;
         String concepto;
         Date creation, update;
+        CategoriaGasto cat;
         try {
             id = set.getInt(1);
             concepto = set.getString(2);
@@ -64,8 +66,8 @@ public class GastoDAOJdbc implements GastoDAO{
             cantidad = set.getDouble(4);
             creation = set.getDate(5);
             update = set.getDate(6);
-
-            g = gf.createGasto(id, concepto, tipo, cantidad, creation, update);
+            cat = CategoriaGastoCollection.getById(tipo);
+            g = GastosFactory.createGasto(id, concepto, cat, cantidad, creation, update);
             
         } catch (SQLException ex) {
             System.out.println("Error de conexión.");
@@ -82,7 +84,7 @@ public class GastoDAOJdbc implements GastoDAO{
         try {
             query = this.c.prepareStatement(queryText, Statement.RETURN_GENERATED_KEYS);
             query.setString(1, g.getConcepto());
-            query.setInt(2, g.getTipo());
+            query.setInt(2, g.getTipo().getId());
             query.setDouble(3, g.getCantidad());
             query.setDate(4, (Date) g.getCreationTime());
             query.setDate(5, (Date) g.getUpdateTime());
@@ -108,7 +110,7 @@ public class GastoDAOJdbc implements GastoDAO{
         try {
             query = this.c.prepareStatement(queryText, Statement.RETURN_GENERATED_KEYS);
             query.setString(1, g.getConcepto());
-            query.setInt(2, g.getTipo());
+            query.setInt(2, g.getTipo().getId());
             query.setDouble(3, g.getCantidad());
             query.setInt(4, g.getId());
             

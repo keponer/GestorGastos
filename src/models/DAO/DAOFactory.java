@@ -9,7 +9,7 @@ import java.sql.Connection;
 import models.CategoriaGasto;
 import models.DAO.JDBC.CategoriaGastoDAOJdbc;
 import models.DAO.JDBC.GastoDAOJdbc;
-import controllers.factoryGastos.Gasto;
+import models.gastos.Gasto;
 
 /**
  *

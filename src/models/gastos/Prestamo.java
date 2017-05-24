@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.factoryGastos;
+package models.gastos;
 
 import java.util.Date;
+import models.CategoriaGasto;
 
 /**
  *
  * @author Alex
  */
-public class Transporte extends Gasto {
+public class Prestamo extends Gasto {
 
-    public Transporte(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
+    public Prestamo(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime) {
         super(id, concepto, tipo, cantidad, creationTime, updateTime);
     }
 

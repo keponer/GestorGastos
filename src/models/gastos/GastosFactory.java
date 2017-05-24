@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.factoryGastos;
+package models.gastos;
 
 import java.util.Date;
+import models.CategoriaGasto;
 
 /**
  *
@@ -14,37 +15,37 @@ import java.util.Date;
 public class GastosFactory{
 
    
-    public Gasto createGasto(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
-        
-        if      (tipo == 1){
+    public static Gasto createGasto(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime) {
+        int tipoID = tipo.getId();
+        if      (tipoID == 1){
             return new Alquiler_Hipoteca(id, concepto, tipo, cantidad, creationTime, updateTime);
         } 
         
-        else if (tipo == 2){
+        else if (tipoID == 2){
             return new Comida(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (tipo == 3){
+        else if (tipoID == 3){
             return new Impuestos(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (tipo == 4){
+        else if (tipoID == 4){
             return new Ocio(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (tipo == 5){
+        else if (tipoID == 5){
             return new Prestamo(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (tipo == 6){
+        else if (tipoID == 6){
             return new Ropa(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (tipo == 7){
+        else if (tipoID == 7){
             return new Salud(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
-        else if (tipo == 8){
+        else if (tipoID == 8){
             return new Transporte(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         

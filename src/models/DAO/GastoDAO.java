@@ -6,7 +6,7 @@
 package models.DAO;
 
 import java.util.List;
-import controllers.factoryGastos.Gasto;
+import models.gastos.Gasto;
 
 /**
  *

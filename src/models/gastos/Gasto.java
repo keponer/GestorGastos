@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.factoryGastos;
+package models.gastos;
 
 import java.util.Date;
+import models.CategoriaGasto;
 
 /**
  *
@@ -15,16 +16,16 @@ public abstract class Gasto {
     
     private int id;
     private String concepto;
-    private int tipo;
+    private CategoriaGasto cat;
     private double cantidad;
     private Date creationTime;
     private Date updateTime;
 
  
-    public Gasto(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime){
+    public Gasto(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime){
         this.id = id;
         this.concepto = concepto;
-        this.tipo = tipo;
+        this.cat = tipo;
         this.cantidad = cantidad;
         this.creationTime = creationTime;
         this.updateTime = updateTime;
@@ -46,12 +47,12 @@ public abstract class Gasto {
         this.concepto = concepto;
     }
 
-    public int getTipo() {
-        return tipo;
+    public CategoriaGasto getTipo() {
+        return cat;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setTipo(CategoriaGasto tipo) {
+        this.cat = tipo;
     }
 
     public double getCantidad() {
@@ -76,6 +77,10 @@ public abstract class Gasto {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+    
+    public double getIVA() {
+        return this.getTipo().getIva();
     }
     
     public abstract double getIVAPagado();

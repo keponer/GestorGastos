@@ -43,7 +43,7 @@ public class CategoriaGastoDAOJdbc implements CategoriaGastoDAO{
             
             query = this.c.prepareStatement(queryText, Statement.RETURN_GENERATED_KEYS);
             query.setString(1, ct.getName());
-            query.setFloat(2, ct.getIva());
+            query.setDouble(2, ct.getIva());
             query.execute();
             ResultSet rs = query.getGeneratedKeys();
             if (rs.next()) {

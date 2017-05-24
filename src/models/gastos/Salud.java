@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers.factoryGastos;
+package models.gastos;
 
 import java.util.Date;
+import models.CategoriaGasto;
 
 /**
  *
  * @author Alex
  */
-public class Ocio extends Gasto {
+public class Salud extends Gasto {
 
-    public Ocio(int id, String concepto, int tipo, double cantidad, Date creationTime, Date updateTime) {
+    public Salud(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime) {
         super(id, concepto, tipo, cantidad, creationTime, updateTime);
     }
 
@@ -28,4 +29,5 @@ public class Ocio extends Gasto {
     public double getSinIVA() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }
