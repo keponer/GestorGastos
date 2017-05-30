@@ -16,13 +16,34 @@ import models.gastos.Gasto;
  */
 public class GastoCollection implements Iterable{
     private List<Gasto> lista;
+    private static GastoCollection instance = null;
+    
+    
+    GastoCollection(){
+        this.lista = null;
+    }
+    GastoCollection(List<Gasto> lista){
+        this.lista = lista;        
+    }
+    
     
     @Override
     public Iterator iterator() {
         return iterator("forward");
     }
     
-    private Iterator iterator(String tipo) {
+    public Iterator iterator(String tipo) {
         return GastoCollectionIteratorFactory.getIterator(tipo, this.lista);
+    }
+    
+    public static GastoCollection getInstance() {
+        if (instance == null) {
+            instance = new GastoCollection();
+        }
+        return instance;
+    }
+    
+    public static void setList(List<Gasto> l) {
+        getInstance().lista = l;
     }
 }

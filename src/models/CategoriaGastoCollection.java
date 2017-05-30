@@ -17,7 +17,7 @@ public class CategoriaGastoCollection {
     private static List<CategoriaGasto> lista = null;
     
     public static boolean ready() {
-        return lista == null;
+        return lista != null;
     }
     
     public static void run() {
