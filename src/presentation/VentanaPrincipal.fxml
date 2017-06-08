@@ -72,7 +72,7 @@
                               <VBox spacing="5.0">
                                  <children>
                                     <Label text="Desde:" />
-                                    <DatePicker />
+                                    <DatePicker id="desdeDatePicker" fx:id="desdeDatePicker" onAction="#changeDesdeFecha" />
                                     <Label text="Hasta:" />
                                     <DatePicker />
                                  </children>
