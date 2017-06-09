@@ -10,6 +10,7 @@ package presentation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import models.CategoriaGasto;
 import models.CategoriaGastoCollection;
 import models.DAO.DAOFactory;
 import models.DAO.SingletonDataConnection;
@@ -43,6 +44,8 @@ public class GestorGastos {
         
         System.out.println("----------------------------------------------");
         System.out.println("");
+        
+        test();
         
         while(true){
             System.out.println("¿Qué quieres hacer? Inserte el número con lo que quiere hacer");
@@ -238,5 +241,14 @@ public class GestorGastos {
         }
     }
 
-    
+    public static void test(){
+        int i = 1;
+        CategoriaGasto ct;
+        while(CategoriaGastoCollection.getById(i) != null) {
+            ct = CategoriaGastoCollection.getById(i++);
+            System.out.println(ct.getId() + "\t" + ct.getName());
+        }
+                
+        
+    }
 }
