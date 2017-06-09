@@ -26,16 +26,11 @@ public abstract class FilteredGastoCollectionIterator implements Iterator{
     
     @Override
     public boolean hasNext() {
-        if (next < lista.size()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return next < lista.size();
     }
 
     @Override
-    public Object next() {
+    public Gasto next() {
         index = next;
         this.calculateNext();
         return lista.get(index);
@@ -53,6 +48,8 @@ public abstract class FilteredGastoCollectionIterator implements Iterator{
             if (this.filter()) break;
         }
     }
+    
+    public Gasto actual() {return lista.get(index);}
     
     public abstract boolean filter();
 }

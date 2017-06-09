@@ -18,6 +18,10 @@ import models.gastos.Gasto;
 public class DAOFactory {
     private static Connection c;
     
+    
+    public static GastoDAO getGastoDAO() {
+      return getGastoDAO(null);
+    }
     public static GastoDAO getGastoDAO(Gasto t) {
       if (c == null) {
           c = SingletonDataConnection.getInstance().getConnection();
@@ -25,6 +29,9 @@ public class DAOFactory {
       return new GastoDAOJdbc(c, t);
     }
     
+    public static CategoriaGastoDAO getCategoriaGastoDAO() {
+        return getCategoriaGastoDAO(null);
+    }
     public static CategoriaGastoDAO getCategoriaGastoDAO(CategoriaGasto ct) {
       if (c == null) {
           c = SingletonDataConnection.getInstance().getConnection();

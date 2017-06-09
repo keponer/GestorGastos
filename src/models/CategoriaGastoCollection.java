@@ -16,13 +16,7 @@ import models.DAO.DAOFactory;
 public class CategoriaGastoCollection {
     private static List<CategoriaGasto> lista = null;
     
-    public static boolean ready() {
-        return lista != null;
-    }
-    
-    public static void run() {
-        lista = DAOFactory.getCategoriaGastoDAO(null).getList();
-    }
+
     
     public static CategoriaGasto getById(int id){
         ListIterator<CategoriaGasto> it = lista.listIterator();
@@ -33,5 +27,23 @@ public class CategoriaGastoCollection {
                 return current;
         }
         return null;
+    }
+
+    public static boolean ready() {
+        return lista != null;
+    }
+
+    private static void poblate() {
+        lista = DAOFactory.getCategoriaGastoDAO(null).getList();
+    }
+
+    public static void resetList() {
+        poblate();
+    }
+
+    public static void start() {
+        if (!ready()) {
+            poblate();
+        }
     }
 }

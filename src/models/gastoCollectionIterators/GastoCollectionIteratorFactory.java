@@ -16,9 +16,11 @@ import models.gastos.Gasto;
 public class GastoCollectionIteratorFactory {
     public static Iterator getIterator(String tipo, List<Gasto> gc) {
         switch (tipo) {
+            case "categoria":
+                return new GastoCollectionIteratorCategoria(gc);
             case "forward": 
             default:
-                throw new UnsupportedOperationException("Not supported yet.");
+                return new GastoCollectionIteratorForward(gc);
         }
     }
 }
