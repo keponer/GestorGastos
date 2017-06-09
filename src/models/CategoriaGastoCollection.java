@@ -16,8 +16,6 @@ import models.DAO.DAOFactory;
 public class CategoriaGastoCollection {
     private static List<CategoriaGasto> lista = null;
     
-
-    
     public static CategoriaGasto getById(int id){
         ListIterator<CategoriaGasto> it = lista.listIterator();
         CategoriaGasto current;

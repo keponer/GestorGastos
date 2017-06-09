@@ -24,8 +24,13 @@ public class CategoriaGastoDAOJdbc implements CategoriaGastoDAO{
     private CategoriaGasto ct;
     private Connection c;
     
+    public CategoriaGastoDAOJdbc(Connection c) {
+        this.c = c;
+        ct = null;
+    }
     public CategoriaGastoDAOJdbc(Connection c, CategoriaGasto ct) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        this.c = c;
+        this.ct = ct;
     }
    
     /**

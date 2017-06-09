@@ -31,6 +31,10 @@ public class GastoDAOJdbc implements GastoDAO{
         this.c = c;
         
     }
+    public GastoDAOJdbc(Connection c) {
+        this.c = c;
+        this.g = null;
+    }
 
     @Override
     public List<Gasto> getList() {
