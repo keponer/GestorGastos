@@ -19,6 +19,7 @@ public class GastoCollectionIteratorFactory {
             case "categoria":
                 return new GastoCollectionIteratorCategoria(gc);
             case "forward": 
+                return new GastoCollectionIteratorGasto(gc);
             default:
                 return new GastoCollectionIteratorForward(gc);
         }

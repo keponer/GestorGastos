@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ListIterator;
 import models.DAO.DAOFactory;
 import models.gastoCollectionIterators.GastoCollectionIteratorFactory;
+import models.gastoCollectionIterators.GastoCollectionIteratorGasto;
 import models.gastos.Gasto;
 
 /**
@@ -17,8 +18,9 @@ import models.gastos.Gasto;
  * @author angel
  */
 public class GastoCollection implements Iterable{
-    private List<Gasto> lista;
+    private static List<Gasto> lista;
     private static GastoCollection instance = null;
+    private static ListIterator<Gasto> it = null;
     
     
     GastoCollection(){
@@ -28,9 +30,10 @@ public class GastoCollection implements Iterable{
         this.lista = lista;        
     }
     
-    public void addGasto(Gasto g) {
-        lista.add(g);
-        DAOFactory.getGastoDAO(g).insert();
+    public static void addGasto(Gasto g) {
+        //lista.add(g);
+        DAOFactory.getGastoDAO().insert();
+        //DAOFactory.getGastoDAO().getList();
     }
     
     public void updateGasto(int id, String concepto, CategoriaGasto cat, double cantidad){
@@ -43,6 +46,10 @@ public class GastoCollection implements Iterable{
         }
     }
     
+    public static void iniciarListIterator(){
+        it = lista.listIterator();
+    }
+    
     public void deleteGasto(int id) {
         Gasto target = getById(id);
         if (target != null) {
@@ -50,7 +57,7 @@ public class GastoCollection implements Iterable{
         }
     }
     
-    public Gasto getById(int id){
+    public static Gasto getById(int id){
         ListIterator<Gasto> it = lista.listIterator();
         Gasto current;
         while(it.hasNext()) {
@@ -61,13 +68,23 @@ public class GastoCollection implements Iterable{
         return null;
     }
 
+    public static Gasto getCurrentGasto(){
+        Gasto current;
+        while(it.hasNext()) {
+            current = it.next();
+            return current;
+        }  
+        return null;
+    }
+    
     
     @Override
     public Iterator iterator() {
         return iterator("forward");
     }
-    public Iterator iterator(String tipo) {
-        return GastoCollectionIteratorFactory.getIterator(tipo, this.lista);
+    
+    public static Iterator iterator(String tipo) {
+        return new GastoCollectionIteratorGasto(GastoCollection.lista);
     }
     
     public static GastoCollection getInstance() {

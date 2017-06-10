@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import models.CategoriaGasto;
 import models.DAO.GastoDAO;
+import models.DAO.SingletonDataConnection;
 
 /**
  *
@@ -80,31 +81,7 @@ public class GastoDAOJdbc implements GastoDAO{
         return g;
     }
     
-    @Override
-    public int insert() {
-        PreparedStatement query;
-        String queryText = "INSERT INTO categorias_transacciones (`concepto`, `tipo`,";
-        queryText += "`cantidad`, `creation_time`, `update_time` ) VALUES (?, ?, ?, ?, ?);";
-        try {
-            query = this.c.prepareStatement(queryText, Statement.RETURN_GENERATED_KEYS);
-            query.setString(1, g.getConcepto());
-            query.setInt(2, g.getTipo().getId());
-            query.setDouble(3, g.getCantidad());
-            query.setDate(4, (Date) g.getCreationTime());
-            query.setDate(5, (Date) g.getUpdateTime());
-            
-            query.execute();
-            ResultSet rs = query.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        }
-        catch(SQLException sqlException) {
-            System.out.println("Posible error de conexión a la db.");
-            return 0;
-        }
-        return -1;
-    }
+ 
 
     @Override
     public boolean update() {
@@ -128,4 +105,30 @@ public class GastoDAOJdbc implements GastoDAO{
         return true;
     }
     
+       @Override
+    public int insert() {
+        SingletonDataConnection instance = SingletonDataConnection.getInstance();
+        c = instance.getConnection();
+        PreparedStatement query;
+        String queryText = "INSERT INTO categorias_transacciones (`concepto`, `tipo`, `cantidad`) VALUES (?, ?, ?);";
+        try {
+            query = c.prepareStatement(queryText);
+            query.setString(1, "aas");
+            query.setInt(2, 1);
+            query.setDouble(3, 32);
+            //query.setDate(4, (Date) g.getCreationTime());
+            //query.setDate(5, (Date) g.getUpdateTime());
+            
+            query.execute();
+            /*ResultSet rs = query.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }*/
+        }
+        catch(SQLException sqlException) {
+            System.out.println("Posible error de conexión a la db.");
+            return 0;
+        }
+        return -1;
+    }
 }
