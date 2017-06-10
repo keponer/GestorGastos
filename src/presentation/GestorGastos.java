@@ -8,10 +8,8 @@ package presentation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Iterator;
 import models.CategoriaGasto;
 import models.CategoriaGastoCollection;
-import models.DAO.DAOFactory;
 import models.DAO.SingletonDataConnection;
 import models.GastoCollection;
 import models.gastoCollectionIterators.GastoCollectionIteratorGasto;
@@ -47,6 +45,11 @@ public class GestorGastos {
         System.out.println("Conectando a la base de datos...");
         SingletonDataConnection.getInstance();
 
+        if(!SingletonDataConnection.isReady()) {
+            System.out.println("No se ha podido conectar a la base de datos");
+            return;
+        }
+        
         System.out.println("Descargando datos de categorias...");
         CategoriaGastoCollection.start();
 

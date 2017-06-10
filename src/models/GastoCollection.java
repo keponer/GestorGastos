@@ -32,8 +32,9 @@ public class GastoCollection implements Iterable{
     
     public static void addGasto(Gasto g) {
         //lista.add(g);
-        DAOFactory.getGastoDAO().insert();
+        DAOFactory.getGastoDAO(g).insert();
         //DAOFactory.getGastoDAO().getList();
+        setList();
     }
     
     public void updateGasto(int id, String concepto, CategoriaGasto cat, double cantidad){

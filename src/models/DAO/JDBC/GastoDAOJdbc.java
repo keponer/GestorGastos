@@ -30,7 +30,7 @@ public class GastoDAOJdbc implements GastoDAO{
     
     public GastoDAOJdbc(Connection c, Gasto t) {
         this.c = c;
-        
+        this.g = t;
     }
     public GastoDAOJdbc(Connection c) {
         this.c = c;
@@ -51,7 +51,7 @@ public class GastoDAOJdbc implements GastoDAO{
             }
         }
         catch(SQLException sqlException) {
-            System.out.println("Posible error de conexión a la db. No se pudo crear el objeto query.");
+            System.out.println("GastoDAOJdbc.getList: Error sql / Conexión.");
             lista = null;
         }
         return lista;
@@ -80,13 +80,11 @@ public class GastoDAOJdbc implements GastoDAO{
         
         return g;
     }
-    
- 
 
     @Override
     public boolean update() {
         PreparedStatement query;
-        String queryText = "UPDATE categorias_transacciones SET `concepto`=?, `tipo`=?, `cantidad`=?";
+        String queryText = "UPDATE transacciones SET `concepto`=?, `tipo`=?, `cantidad`=?";
         queryText += " WHERE `id` = ?;";
         try {
             query = this.c.prepareStatement(queryText, Statement.RETURN_GENERATED_KEYS);
@@ -99,25 +97,28 @@ public class GastoDAOJdbc implements GastoDAO{
 
         }
         catch(SQLException sqlException) {
-            System.out.println("Posible error de conexión a la db.");
+            System.out.println("GastoDAOJdbc.update: Error sql / Conexión.");
             return false;
         }
         return true;
     }
-    
-       @Override
+
+    @Override
     public int insert() {
+        if (g == null || g.getId() != 0) {
+            System.out.println("GastoDAOJdbc.insert: Se ha intentado insertar un Gasto nulo o uno ya existente.");
+            return -1;
+        }
+
         SingletonDataConnection instance = SingletonDataConnection.getInstance();
         c = instance.getConnection();
         PreparedStatement query;
-        String queryText = "INSERT INTO categorias_transacciones (`concepto`, `tipo`, `cantidad`) VALUES (?, ?, ?);";
+        String queryText = "INSERT INTO transacciones (`concepto`, `tipo`, `cantidad`) VALUES (?, ?, ?);";
         try {
             query = c.prepareStatement(queryText);
-            query.setString(1, "aas");
-            query.setInt(2, 1);
-            query.setDouble(3, 32);
-            //query.setDate(4, (Date) g.getCreationTime());
-            //query.setDate(5, (Date) g.getUpdateTime());
+            query.setString(1, g.getConcepto());
+            query.setInt(2, g.getTipo().getId());
+            query.setDouble(3, g.getCantidad());
             
             query.execute();
             /*ResultSet rs = query.getGeneratedKeys();
@@ -126,9 +127,9 @@ public class GastoDAOJdbc implements GastoDAO{
             }*/
         }
         catch(SQLException sqlException) {
-            System.out.println("Posible error de conexión a la db.");
+            System.out.println("GastoDAOJdbc.insert: Error sql / Conexión.");
             return 0;
         }
-        return -1;
+        return 1;
     }
 }

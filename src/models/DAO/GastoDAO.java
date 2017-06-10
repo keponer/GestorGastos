@@ -16,7 +16,7 @@ public interface GastoDAO {
 
     public List<Gasto> getList();
     
-    public int insert();
-    
     public boolean update();
+    
+    public int insert();
 }
