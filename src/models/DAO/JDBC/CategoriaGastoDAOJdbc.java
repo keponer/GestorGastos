@@ -42,6 +42,9 @@ public class CategoriaGastoDAOJdbc implements CategoriaGastoDAO{
      */
     @Override
     public int insert() {
+        if (ct == null || ct.getId() > 0)
+            return -1;
+        
         PreparedStatement query;
         String queryText = "INSERT INTO categorias_transacciones (`name`, `iva`) VALUES (?, ?);";
         try {
@@ -50,16 +53,12 @@ public class CategoriaGastoDAOJdbc implements CategoriaGastoDAO{
             query.setString(1, ct.getName());
             query.setDouble(2, ct.getIva());
             query.execute();
-            ResultSet rs = query.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
+            return 1;
         }
         catch(SQLException sqlException) {
             System.out.println("Posible error de conexión a la db.");
             return 0;
         }
-        return -1;
     }
     
     /**
