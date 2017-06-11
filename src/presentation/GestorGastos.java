@@ -17,7 +17,7 @@ import models.gastos.Alquiler_Hipoteca;
 import models.gastos.Comida;
 import models.gastos.Gasto;
 import models.gastos.GastosFactory;
-import models.gastos.Impuestos;
+import models.gastos.Impuesto;
 import models.gastos.Ocio;
 import models.gastos.Otro;
 import models.gastos.Prestamo;
@@ -366,7 +366,7 @@ public class GestorGastos {
 
         while (it.hasNext()) {
             g = it.next();
-            if (g instanceof Impuestos) {
+            if (g instanceof Impuesto) {
                 System.out.println(g.getId() + "--" + g.getConcepto() + "--" + g.getCantidad() + "--" + g.getCreationTime() + "--" + g.getTipo().getName());
             }
         }

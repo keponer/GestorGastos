@@ -12,9 +12,9 @@ import models.CategoriaGasto;
  *
  * @author Alex
  */
-public class Impuestos extends Gasto {
+public class Impuesto extends Gasto {
 
- public Impuestos(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime) {
+ public Impuesto(int id, String concepto, CategoriaGasto tipo, double cantidad, Date creationTime, Date updateTime) {
         super(id, concepto, tipo, cantidad, creationTime, updateTime);
     }
 

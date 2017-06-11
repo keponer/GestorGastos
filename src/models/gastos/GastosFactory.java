@@ -26,7 +26,7 @@ public class GastosFactory{
         }
         
         else if (tipoID == 3){
-            return new Impuestos(id, concepto, tipo, cantidad, creationTime, updateTime);
+            return new Impuesto(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
         
         else if (tipoID == 4){
