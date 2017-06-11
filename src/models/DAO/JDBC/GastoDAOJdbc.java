@@ -121,13 +121,10 @@ public class GastoDAOJdbc implements GastoDAO{
             query.setDouble(3, g.getCantidad());
             
             query.execute();
-<<<<<<< HEAD
             ResultSet rs = query.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getInt(1);
             }
-=======
->>>>>>> origin/angel
         }
         catch(SQLException sqlException) {
             System.out.println("GastoDAOJdbc.insert: Error sql / Conexión.");

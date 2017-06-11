@@ -50,7 +50,7 @@ public class GastosFactory{
         }
         
         else {
-            return new Otros(id, concepto, tipo, cantidad, creationTime, updateTime);
+            return new Otro(id, concepto, tipo, cantidad, creationTime, updateTime);
         }
     
     }

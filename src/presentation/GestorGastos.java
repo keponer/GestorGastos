@@ -19,7 +19,7 @@ import models.gastos.Gasto;
 import models.gastos.GastosFactory;
 import models.gastos.Impuestos;
 import models.gastos.Ocio;
-import models.gastos.Otros;
+import models.gastos.Otro;
 import models.gastos.Prestamo;
 import models.gastos.Ropa;
 import models.gastos.Salud;
@@ -444,7 +444,7 @@ public class GestorGastos {
 
         while (it.hasNext()) {
             g = it.next();
-            if (g instanceof Otros) {
+            if (g instanceof Otro) {
                 System.out.println(g.getId() + "--" + g.getConcepto() + "--" + g.getCantidad() + "--" + g.getCreationTime() + "--" + g.getTipo().getName());
             }
         }
