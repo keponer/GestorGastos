@@ -19,4 +19,6 @@ public interface GastoDAO {
     public boolean update();
     
     public int insert();
+    
+    public boolean delete();
 }

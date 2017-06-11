@@ -37,12 +37,9 @@ public class GastoCollection implements Iterable{
         setList();
     }
     
-    public void updateGasto(int id, String concepto, CategoriaGasto cat, double cantidad){
-        Gasto target = getById(id);
+    public static void updateGasto(Gasto g){
+        Gasto target = g;
         if (target != null) {
-            target.setCantidad(cantidad);
-            target.setConcepto(concepto);
-            target.setTipo(cat);
             DAOFactory.getGastoDAO(target).update();
         }
     }
@@ -51,10 +48,10 @@ public class GastoCollection implements Iterable{
         it = lista.listIterator();
     }
     
-    public void deleteGasto(int id) {
-        Gasto target = getById(id);
+    public static void deleteGasto(Gasto g) {
+        Gasto target = g;
         if (target != null) {
-            //DAOFactory.getGastoDAO(target).delete(); implementar en GastoDAO y GastoDAOJdbc
+            DAOFactory.getGastoDAO(target).delete(); 
         }
     }
     

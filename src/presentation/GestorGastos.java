@@ -179,7 +179,11 @@ public class GestorGastos {
         CategoriaGasto ct;
         Gasto g;
         int iInput = 0;
+        int idGasto = 0;
         String sInput = "";
+        String concepto = "";
+        int tipoGasto = 0;
+        double cantidad = 0;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Editar gasto");
@@ -197,19 +201,53 @@ public class GestorGastos {
 
         try {
             iInput = Integer.parseInt(br.readLine());
+            getGastos(iInput);
         } catch (NumberFormatException nfe) {
             System.err.println("Invalid Format!");
         }
+        
+        
 
         System.out.println("Seleccione la id del gasto que quiera editar:");
 
         try {
-            iInput = Integer.parseInt(br.readLine());
+            idGasto = Integer.parseInt(br.readLine());
         } catch (NumberFormatException nfe) {
             System.err.println("Invalid Format!");
         }
+        
+        System.out.println("Introduce el concepto:");
+        concepto = br.readLine();
+
+        System.out.println("Introduce el tipo de gasto:");
+        System.out.println("1. Alquiler/Hipoteca");
+        System.out.println("2. Comida");
+        System.out.println("3. Impuestos");
+        System.out.println("4. Ocio");
+        System.out.println("5. Prestamos");
+        System.out.println("6. Ropa");
+        System.out.println("7. Salud");
+        System.out.println("8. Transporte");
+        System.out.println("9. Otros");
+
+        try {
+            tipoGasto = Integer.parseInt(br.readLine());
+        } catch (NumberFormatException nfe) {
+            System.err.println("Invalid Format!");
+        }
+
+        System.out.println("Cantidad:");
+
+        try {
+            cantidad = Double.parseDouble(br.readLine());
+        } catch (NumberFormatException nfe) {
+            System.err.println("Invalid Format!");
+        }
+        
+        ct = CategoriaGastoCollection.getById(tipoGasto);
     
-       //g = gf.createGasto(iInput, sInput, tipo, iInput, null, null);
+        g = gf.createGasto(idGasto, concepto, ct, cantidad, null, null);
+        GastoCollection.updateGasto(g);
     }
 
     public static void eliminarGasto() throws IOException {
@@ -237,6 +275,7 @@ public class GestorGastos {
             System.err.println("Invalid Format!");
         }
 
+        getGastos(iInput);
         System.out.println("Seleccione la id del gasto que quiera eliminar:");
 
         try {
@@ -244,6 +283,13 @@ public class GestorGastos {
         } catch (NumberFormatException nfe) {
             System.err.println("Invalid Format!");
         }
+        
+        Gasto g;
+        GastoCollection.setList();
+        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        
+        g = it.getGastoById(iInput);
+        GastoCollection.deleteGasto(g);
 
     }
 

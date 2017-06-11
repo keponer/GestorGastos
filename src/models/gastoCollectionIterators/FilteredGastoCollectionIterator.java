@@ -49,6 +49,14 @@ public abstract class FilteredGastoCollectionIterator implements Iterator{
         }
     }
     
+    public Gasto getGastoById(int id){
+        
+        while(hasNext()){
+        if(next().getId() == id) return actual(); 
+        }
+        return null;
+    }
+    
     public Gasto actual() {return lista.get(index);}
     
     public abstract boolean filter();
