@@ -16,11 +16,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.CategoriaGasto;
 import models.DAO.GastoDAO;
-import models.DAO.SingletonDataConnection;
 
 /**
  *
@@ -85,6 +82,9 @@ public class GastoDAOJdbc implements GastoDAO{
 
     @Override
     public boolean update() {
+        if (this.g == null || this.g.getId() <= 0)
+            return false;
+        
         PreparedStatement query;
         String queryText = "UPDATE transacciones SET `concepto`=?, `tipo`=?, `cantidad`=?";
         queryText += " WHERE `id` = ?;";
@@ -121,10 +121,13 @@ public class GastoDAOJdbc implements GastoDAO{
             query.setDouble(3, g.getCantidad());
             
             query.execute();
+<<<<<<< HEAD
             ResultSet rs = query.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getInt(1);
             }
+=======
+>>>>>>> origin/angel
         }
         catch(SQLException sqlException) {
             System.out.println("GastoDAOJdbc.insert: Error sql / Conexión.");
@@ -133,7 +136,11 @@ public class GastoDAOJdbc implements GastoDAO{
         return 1;
     }
     
+    @Override
     public boolean delete(){
+        if (this.g == null || this.g.getId() <= 0)
+            return false;
+        
         PreparedStatement query;
         String queryText = "DELETE FROM transacciones WHERE id=?;";
         
