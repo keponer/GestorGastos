@@ -6,7 +6,6 @@
 package models.gastoCollectionIterators;
 
 import java.util.List;
-import models.CategoriaGasto;
 import models.gastos.Gasto;
 
 /**
@@ -14,7 +13,7 @@ import models.gastos.Gasto;
  * @author angel
  */
 public class GastoCollectionIteratorCategoria extends FilteredGastoCollectionIterator{
-    private int cat = 0;
+    private Class cat = null;
     
     public GastoCollectionIteratorCategoria(List<Gasto> lista) {
         super(lista);
@@ -22,10 +21,10 @@ public class GastoCollectionIteratorCategoria extends FilteredGastoCollectionIte
     
     @Override
     public boolean filter() {
-        return actual().getTipo().getId() == cat;
+        return cat == actual().getClass();
     }
     
-    public void setCategoria(CategoriaGasto c) {
-        cat = c.getId();
+    public void setCategoria(Class c) {
+        cat = c;
     }
 }

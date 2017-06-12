@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import models.DAO.DAOFactory;
+import models.gastoCollectionIterators.FilteredGastoCollectionIterator;
 import models.gastoCollectionIterators.GastoCollectionIteratorFactory;
-import models.gastoCollectionIterators.GastoCollectionIteratorGasto;
 import models.gastos.Gasto;
 
 /**
@@ -18,9 +18,9 @@ import models.gastos.Gasto;
  * @author angel
  */
 public class GastoCollection implements Iterable{
-    private static List<Gasto> lista;
+    private List<Gasto> lista;
     private static GastoCollection instance = null;
-    private static ListIterator<Gasto> it = null;
+    private ListIterator<Gasto> it = null;
     
     
     GastoCollection(){
@@ -30,59 +30,32 @@ public class GastoCollection implements Iterable{
         this.lista = lista;        
     }
     
-    public static void addGasto(Gasto g) {
-        //lista.add(g);
+    public void addGasto(Gasto g) {
         DAOFactory.getGastoDAO(g).insert();
-        //DAOFactory.getGastoDAO().getList();
         setList();
     }
     
-    public static void updateGasto(Gasto g){
-        Gasto target = g;
-        if (target != null) {
-            DAOFactory.getGastoDAO(target).update();
+    public void updateGasto(Gasto g){
+        if (g != null) {
+            DAOFactory.getGastoDAO(g).update();
         }
+        setList();
     }
     
-    public static void iniciarListIterator(){
-        it = lista.listIterator();
-    }
-    
-    public static void deleteGasto(Gasto g) {
-        Gasto target = g;
-        if (target != null) {
-            DAOFactory.getGastoDAO(target).delete(); 
+    public void deleteGasto(Gasto g) {
+        if (g != null) {
+            DAOFactory.getGastoDAO(g).delete(); 
         }
+        setList();
     }
-    
-    public static Gasto getById(int id){
-        ListIterator<Gasto> it = lista.listIterator();
-        Gasto current;
-        while(it.hasNext()) {
-            current = it.next();
-            if (current.getId() == id)
-                return current;
-        }
-        return null;
-    }
-
-    public static Gasto getCurrentGasto(){
-        Gasto current;
-        while(it.hasNext()) {
-            current = it.next();
-            return current;
-        }  
-        return null;
-    }
-    
     
     @Override
-    public Iterator iterator() {
+    public FilteredGastoCollectionIterator iterator() {
         return iterator("forward");
     }
     
-    public static Iterator iterator(String tipo) {
-        return new GastoCollectionIteratorGasto(GastoCollection.lista);
+    public FilteredGastoCollectionIterator iterator(String tipo) {
+        return GastoCollectionIteratorFactory.getIterator(tipo, lista);
     }
     
     public static GastoCollection getInstance() {

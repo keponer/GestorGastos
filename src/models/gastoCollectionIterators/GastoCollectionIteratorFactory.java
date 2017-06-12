@@ -14,12 +14,11 @@ import models.gastos.Gasto;
  * @author angel
  */
 public class GastoCollectionIteratorFactory {
-    public static Iterator getIterator(String tipo, List<Gasto> gc) {
+    public static FilteredGastoCollectionIterator getIterator(String tipo, List<Gasto> gc) {
         switch (tipo) {
             case "categoria":
                 return new GastoCollectionIteratorCategoria(gc);
             case "forward": 
-                return new GastoCollectionIteratorGasto(gc);
             default:
                 return new GastoCollectionIteratorForward(gc);
         }

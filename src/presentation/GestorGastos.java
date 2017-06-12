@@ -12,7 +12,7 @@ import models.CategoriaGasto;
 import models.CategoriaGastoCollection;
 import models.DAO.SingletonDataConnection;
 import models.GastoCollection;
-import models.gastoCollectionIterators.GastoCollectionIteratorGasto;
+import models.gastoCollectionIterators.FilteredGastoCollectionIterator;
 import models.gastos.Alquiler_Hipoteca;
 import models.gastos.Comida;
 import models.gastos.Gasto;
@@ -60,10 +60,6 @@ public class GestorGastos {
         System.out.println("----------------------------------------------");
         System.out.println("");
 
-        test();
-        getAllGastos();
-        getAllImpuestos();
-
         while (true) {
             System.out.println("¿Qué quieres hacer? Inserte el número con lo que quiere hacer");
             System.out.println("1. Mostrar gastos");
@@ -98,24 +94,16 @@ public class GestorGastos {
 
     }
 
-    public static void mostrarGastos() throws IOException {
+    public static void mostrarGastos() throws IOException{
         
         
         int iInput = 0;
         String sInput = "";
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        
         System.out.println("Mostrar gastos:");
-        System.out.println("0. Todos");
-        System.out.println("1. Alquiler/Hipoteca");
-        System.out.println("2. Comida");
-        System.out.println("3. Impuestos");
-        System.out.println("4. Ocio");
-        System.out.println("5. Prestamos");
-        System.out.println("6. Ropa");
-        System.out.println("7. Salud");
-        System.out.println("8. Transporte");
-        System.out.println("9. Otros");
+        System.out.println("0\tTodos");
+        printCategorias();
 
         try {
             iInput = Integer.parseInt(br.readLine());
@@ -141,15 +129,8 @@ public class GestorGastos {
         concepto = br.readLine();
 
         System.out.println("Introduce el tipo de gasto:");
-        System.out.println("1. Alquiler/Hipoteca");
-        System.out.println("2. Comida");
-        System.out.println("3. Impuestos");
-        System.out.println("4. Ocio");
-        System.out.println("5. Prestamos");
-        System.out.println("6. Ropa");
-        System.out.println("7. Salud");
-        System.out.println("8. Transporte");
-        System.out.println("9. Otros");
+        System.out.println("0\tTodos");
+        printCategorias();
 
         try {
             tipoGasto = Integer.parseInt(br.readLine());
@@ -170,7 +151,7 @@ public class GestorGastos {
         
         g = gf.createGasto(0, concepto, ct, cantidad, null, null);
         
-        GastoCollection.addGasto(g);
+        GastoCollection.getInstance().addGasto(g);
 
     }
 
@@ -189,15 +170,8 @@ public class GestorGastos {
         System.out.println("Editar gasto");
 
         System.out.println("Introduce el tipo de gasto:");
-        System.out.println("1. Alquiler/Hipoteca");
-        System.out.println("2. Comida");
-        System.out.println("3. Impuestos");
-        System.out.println("4. Ocio");
-        System.out.println("5. Prestamos");
-        System.out.println("6. Ropa");
-        System.out.println("7. Salud");
-        System.out.println("8. Transporte");
-        System.out.println("9. Otros");
+        System.out.println("0\tTodos");
+        printCategorias();
 
         try {
             iInput = Integer.parseInt(br.readLine());
@@ -220,15 +194,7 @@ public class GestorGastos {
         concepto = br.readLine();
 
         System.out.println("Introduce el tipo de gasto:");
-        System.out.println("1. Alquiler/Hipoteca");
-        System.out.println("2. Comida");
-        System.out.println("3. Impuestos");
-        System.out.println("4. Ocio");
-        System.out.println("5. Prestamos");
-        System.out.println("6. Ropa");
-        System.out.println("7. Salud");
-        System.out.println("8. Transporte");
-        System.out.println("9. Otros");
+        printCategorias();
 
         try {
             tipoGasto = Integer.parseInt(br.readLine());
@@ -247,7 +213,7 @@ public class GestorGastos {
         ct = CategoriaGastoCollection.getInstance().getById(tipoGasto);
     
         g = gf.createGasto(idGasto, concepto, ct, cantidad, null, null);
-        GastoCollection.updateGasto(g);
+        GastoCollection.getInstance().updateGasto(g);
     }
 
     public static void eliminarGasto() throws IOException {
@@ -259,15 +225,8 @@ public class GestorGastos {
         System.out.println("Eliminar gasto");
 
         System.out.println("Introduce el tipo de gasto:");
-        System.out.println("1. Alquiler/Hipoteca");
-        System.out.println("2. Comida");
-        System.out.println("3. Impuestos");
-        System.out.println("4. Ocio");
-        System.out.println("5. Prestamos");
-        System.out.println("6. Ropa");
-        System.out.println("7. Salud");
-        System.out.println("8. Transporte");
-        System.out.println("9. Otros");
+        System.out.println("0\tTodos");
+        printCategorias();
 
         try {
             iInput = Integer.parseInt(br.readLine());
@@ -285,11 +244,11 @@ public class GestorGastos {
         }
         
         Gasto g;
-        GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        //GastoCollection.setList();
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
         
         g = it.getGastoById(iInput);
-        GastoCollection.deleteGasto(g);
+        GastoCollection.getInstance().deleteGasto(g);
 
     }
 
@@ -324,8 +283,7 @@ public class GestorGastos {
 
     public static void getAllGastos() {
         Gasto g;
-        GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -336,7 +294,7 @@ public class GestorGastos {
     public static void getAllAlquiler_Hipoteca() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -349,7 +307,7 @@ public class GestorGastos {
     public static void getAllComida() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -362,7 +320,7 @@ public class GestorGastos {
     public static void getAllImpuestos() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -375,7 +333,7 @@ public class GestorGastos {
     public static void getAllOcio() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -388,7 +346,7 @@ public class GestorGastos {
     public static void getAllPrestamo() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -401,7 +359,7 @@ public class GestorGastos {
     public static void getAllRopa() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -414,7 +372,7 @@ public class GestorGastos {
     public static void getAllSalud() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -427,7 +385,7 @@ public class GestorGastos {
     public static void getAllTransporte() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -440,7 +398,7 @@ public class GestorGastos {
     public static void getAllOtros() {
         Gasto g;
         GastoCollection.setList();
-        GastoCollectionIteratorGasto it = (GastoCollectionIteratorGasto) GastoCollection.iterator("forward");
+        FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
 
         while (it.hasNext()) {
             g = it.next();
@@ -451,7 +409,7 @@ public class GestorGastos {
     }
     
 
-    public static void test() {
+    public static void printCategorias() {
         int i = 1;
         CategoriaGasto ct;
         while (CategoriaGastoCollection.getInstance().getById(i) != null) {
