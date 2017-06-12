@@ -104,9 +104,10 @@ public class GastoDAOJdbcTest {
         System.out.println("insert");
         c = SingletonDataConnection.getInstance().getConnection();
         CategoriaGasto ct = CategoriaGastoCollection.getInstance().getById(1);
-        g = new Alquiler_Hipoteca(666, "666", ct, 0, null, null);
+        g = new Alquiler_Hipoteca(0, "666", ct, 0, null, null);
         GastoDAOJdbc instance = new GastoDAOJdbc(c, g);
         int result = instance.insert();
+        int expResult = 1;
         assertEquals(expResult, result);
     }
 
