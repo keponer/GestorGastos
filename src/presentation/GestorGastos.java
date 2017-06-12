@@ -166,7 +166,7 @@ public class GestorGastos {
         }
         
         
-        ct = CategoriaGastoCollection.getById(tipoGasto);
+        ct = CategoriaGastoCollection.getInstance().getById(tipoGasto);
         
         g = gf.createGasto(0, concepto, ct, cantidad, null, null);
         
@@ -244,7 +244,7 @@ public class GestorGastos {
             System.err.println("Invalid Format!");
         }
         
-        ct = CategoriaGastoCollection.getById(tipoGasto);
+        ct = CategoriaGastoCollection.getInstance().getById(tipoGasto);
     
         g = gf.createGasto(idGasto, concepto, ct, cantidad, null, null);
         GastoCollection.updateGasto(g);
@@ -454,8 +454,8 @@ public class GestorGastos {
     public static void test() {
         int i = 1;
         CategoriaGasto ct;
-        while (CategoriaGastoCollection.getById(i) != null) {
-            ct = CategoriaGastoCollection.getById(i++);
+        while (CategoriaGastoCollection.getInstance().getById(i) != null) {
+            ct = CategoriaGastoCollection.getInstance().getById(i++);
             System.out.println(ct.getId() + "\t" + ct.getName());
         }
     }

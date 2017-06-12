@@ -70,7 +70,7 @@ public class GastoDAOJdbc implements GastoDAO{
             cantidad = set.getDouble(4);
             creation = set.getDate(5);
             update = set.getDate(6);
-            cat = CategoriaGastoCollection.getById(tipo);
+            cat = CategoriaGastoCollection.getInstance().getById(tipo);
             g = GastosFactory.createGasto(id, concepto, cat, cantidad, creation, update);
             
         } catch (SQLException ex) {

@@ -41,7 +41,7 @@ public class GastoDAOJdbcTest {
         GastoCollection.getInstance();
         DAOFactory.getGastoDAO();
         c = SingletonDataConnection.getInstance().getConnection();
-        CategoriaGasto ct = CategoriaGastoCollection.getById(1);
+        CategoriaGasto ct = CategoriaGastoCollection.getInstance().getById(1);
         g = new Alquiler_Hipoteca(666, "666", ct, 0, null, null);
     }
     
@@ -107,7 +107,7 @@ public class GastoDAOJdbcTest {
     public void testInsert() {
         System.out.println("insert");
         c = SingletonDataConnection.getInstance().getConnection();
-        CategoriaGasto ct = CategoriaGastoCollection.getById(1);
+        CategoriaGasto ct = CategoriaGastoCollection.getInstance().getById(1);
         g = new Alquiler_Hipoteca(666, "666", ct, 0, null, null);
         GastoDAOJdbc instance = new GastoDAOJdbc(c, g);
         int expResult = 666;

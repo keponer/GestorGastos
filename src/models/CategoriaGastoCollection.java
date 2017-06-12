@@ -14,9 +14,10 @@ import models.DAO.DAOFactory;
  * @author angel
  */
 public class CategoriaGastoCollection {
-    private static List<CategoriaGasto> lista = null;
+    private List<CategoriaGasto> lista = null;
+    private static CategoriaGastoCollection instance;
     
-    public static CategoriaGasto getById(int id){
+    public CategoriaGasto getById(int id){
         ListIterator<CategoriaGasto> it = lista.listIterator();
         CategoriaGasto current;
         while(it.hasNext()) {
@@ -28,20 +29,23 @@ public class CategoriaGastoCollection {
     }
 
     public static boolean ready() {
-        return lista != null;
+        return getInstance().lista != null;
     }
 
     private static void poblate() {
-        lista = DAOFactory.getCategoriaGastoDAO(null).getList();
-    }
-
-    public static void resetList() {
-        poblate();
+        getInstance().lista = DAOFactory.getCategoriaGastoDAO(null).getList();
     }
 
     public static void start() {
         if (!ready()) {
             poblate();
         }
+    }
+    
+    public static CategoriaGastoCollection getInstance() {
+        if (instance == null) {
+            instance = new CategoriaGastoCollection();
+        }
+        return instance;
     }
 }
