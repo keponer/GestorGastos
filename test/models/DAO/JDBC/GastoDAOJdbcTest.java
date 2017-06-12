@@ -29,7 +29,7 @@ import static org.junit.Assert.*;
 public class GastoDAOJdbcTest {
     
     private static Connection c;
-    private static Gasto g;
+    private static Gasto nulo, g, sinId;
     
     public GastoDAOJdbcTest() {
     }
@@ -82,8 +82,6 @@ public class GastoDAOJdbcTest {
         Gasto expResult = null;
         Gasto result = GastoDAOJdbc.parseResultRow(set);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -96,8 +94,6 @@ public class GastoDAOJdbcTest {
         boolean expResult = false;
         boolean result = instance.update();
         assertTrue(result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -110,11 +106,8 @@ public class GastoDAOJdbcTest {
         CategoriaGasto ct = CategoriaGastoCollection.getInstance().getById(1);
         g = new Alquiler_Hipoteca(666, "666", ct, 0, null, null);
         GastoDAOJdbc instance = new GastoDAOJdbc(c, g);
-        int expResult = 666;
         int result = instance.insert();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -127,8 +120,6 @@ public class GastoDAOJdbcTest {
         boolean expResult = false;
         boolean result = instance.delete();
         assertTrue(result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

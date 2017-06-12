@@ -66,6 +66,10 @@ public class GastoDAOJdbc implements GastoDAO{
      * @return Objeto tipo gasto parseado
      */
     public static Gasto parseResultRow(ResultSet set) {
+        if (!(set instanceof Gasto)) {
+            return null;
+        }
+            
         Gasto g = null;
         int id, tipo;
         double cantidad;
