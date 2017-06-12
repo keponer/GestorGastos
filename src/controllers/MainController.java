@@ -88,6 +88,7 @@ public class MainController {
         FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
         while (it.hasNext()) {
             g = it.next();
+            System.out.println(g.getId() + "--" + g.getConcepto() + "--" +g.getCantidad() + "--" + g.getCreationTime() + "--" + g.getTipo().getName());
         }
     }
 
