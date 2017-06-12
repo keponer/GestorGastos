@@ -30,6 +30,9 @@ import models.gastos.Transporte;
  */
 public class MainController {
 
+    /**
+     * Printea por consola todos los Gastos de tipo Ocio.
+     */
     public static void getAllOcio() {
         Gasto g;
         GastoCollection.setList();
@@ -42,6 +45,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Pide por consola todos los datos necesarios para crear un gasto nuevo y lo añade a la base de datos.
+     * @throws IOException 
+     */
     public static void añadirGasto() throws IOException {
         CategoriaGasto ct;
         Gasto g;
@@ -71,6 +78,9 @@ public class MainController {
         GastoCollection.getInstance().addGasto(g);
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Transporte.
+     */
     public static void getAllTransporte() {
         Gasto g;
         GastoCollection.setList();
@@ -83,6 +93,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos.
+     */
     public static void getAllGastos() {
         Gasto g;
         FilteredGastoCollectionIterator it = GastoCollection.getInstance().iterator("forward");
@@ -92,6 +105,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todas la categorías
+     */
     public static void printCategorias() {
         int i = 1;
         CategoriaGasto ct;
@@ -101,6 +117,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Ropa
+     */
     public static void getAllRopa() {
         Gasto g;
         GastoCollection.setList();
@@ -113,6 +132,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Prestamo
+     */
     public static void getAllPrestamo() {
         Gasto g;
         GastoCollection.setList();
@@ -125,6 +147,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Pide por consola todos los datos necesario para editar un gasto y lo edita en la base de datos
+     * @throws IOException 
+     */
     public static void editarGasto() throws IOException {
         CategoriaGasto ct;
         Gasto g;
@@ -171,6 +197,10 @@ public class MainController {
         GastoCollection.getInstance().updateGasto(g);
     }
 
+    /**
+     * Printea por consola un gasto dada su ID
+     * @throws IOException 
+     */
     public static void mostrarGastos() throws IOException {
         int iInput = 0;
         String sInput = "";
@@ -186,6 +216,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Alquiler_Hipoteca
+     */
     public static void getAllAlquiler_Hipoteca() {
         Gasto g;
         GastoCollection.setList();
@@ -198,6 +231,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Comida
+     */
     public static void getAllComida() {
         Gasto g;
         GastoCollection.setList();
@@ -210,6 +246,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Otros
+     */
     public static void getAllOtros() {
         Gasto g;
         GastoCollection.setList();
@@ -222,6 +261,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Impuestos
+     */
     public static void getAllImpuestos() {
         Gasto g;
         GastoCollection.setList();
@@ -234,6 +276,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Printea por consola todos los Gastos de tipo Salud
+     */
     public static void getAllSalud() {
         Gasto g;
         GastoCollection.setList();
@@ -246,6 +291,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Dado un int con el tipo de gasto printea ese tipo, en caso de ser 0 printea todos.
+     * @param tipoGasto Tipo de gasto a printear
+     */
     public static void getGastos(int tipoGasto) {
         switch (tipoGasto) {
             case 0:
@@ -283,6 +332,10 @@ public class MainController {
         }
     }
 
+    /**
+     * Elimina un gasto de la base de datos dada su ID por consola
+     * @throws IOException 
+     */
     public static void eliminarGasto() throws IOException {
         int iInput = 0;
         String sInput = "";

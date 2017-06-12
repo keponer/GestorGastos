@@ -36,6 +36,10 @@ public class GastoDAOJdbc implements GastoDAO{
         this.g = null;
     }
 
+    /**
+     * Se conecta a la base de datos para devolver una lista con todos los gastos
+     * @return Lista tipo gasto
+     */
     @Override
     public List<Gasto> getList() {
         List<Gasto> lista = new ArrayList<>();
@@ -56,6 +60,11 @@ public class GastoDAOJdbc implements GastoDAO{
         return lista;
     }
 
+    /**
+     * Dado el resultado de una query lo parsea en un objecto de tipo gasto
+     * @param set
+     * @return Objeto tipo gasto parseado
+     */
     public static Gasto parseResultRow(ResultSet set) {
         Gasto g = null;
         int id, tipo;
@@ -80,6 +89,10 @@ public class GastoDAOJdbc implements GastoDAO{
         return g;
     }
 
+    /**
+     * Dado un gasto hace un update de este mismo en la base de datos
+     * @return True en caso de conseguir hacer el update False en el caso contrario
+     */
     @Override
     public boolean update() {
         if (this.g == null || this.g.getId() <= 0)
@@ -105,6 +118,10 @@ public class GastoDAOJdbc implements GastoDAO{
         return true;
     }
 
+    /**
+     * Inserta un Gasto en la base de datos
+     * @return int con la id del nuevo gasto
+     */
     @Override
     public int insert() {
         if (g == null || g.getId() != 0) {
@@ -133,6 +150,10 @@ public class GastoDAOJdbc implements GastoDAO{
         return 1;
     }
     
+    /**
+     * Elimina un gasto de la base de datos por su id
+     * @return True en caso de eliminar el gasto con exito False en el caso contrario
+     */
     @Override
     public boolean delete(){
         if (this.g == null || this.g.getId() <= 0)

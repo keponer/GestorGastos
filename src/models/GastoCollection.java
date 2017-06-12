@@ -30,11 +30,19 @@ public class GastoCollection implements Iterable{
         this.lista = lista;        
     }
     
+    /**
+     * Llamada al DAOFactory y su insert correspondiente. Añade un Gasto en la base de datos.
+     * @param g Gasto que será añadido
+     */
     public void addGasto(Gasto g) {
         DAOFactory.getGastoDAO(g).insert();
         setList();
     }
     
+    /**
+     * Llamada al DAOFactory y su update correspondiente. Updatea un Gasto en la base de datos.
+     * @param g Gasto que será updateado con los nuevos datos
+     */
     public void updateGasto(Gasto g){
         if (g != null) {
             DAOFactory.getGastoDAO(g).update();
@@ -42,6 +50,10 @@ public class GastoCollection implements Iterable{
         setList();
     }
     
+    /**
+     * Llamada al DAOFactory y su delete correspondiente. Elimina un Gasto en la base de datos.
+     * @param g Gasto que será eliminado de la base de datos
+     */
     public void deleteGasto(Gasto g) {
         if (g != null) {
             DAOFactory.getGastoDAO(g).delete(); 
@@ -49,10 +61,15 @@ public class GastoCollection implements Iterable{
         setList();
     }
     
+    /**
+     * Llamada el iterador 
+     * @return Iterador
+     */
     @Override
     public FilteredGastoCollectionIterator iterator() {
         return iterator("forward");
     }
+    
     
     public FilteredGastoCollectionIterator iterator(String tipo) {
         return GastoCollectionIteratorFactory.getIterator(tipo, lista);
@@ -65,9 +82,14 @@ public class GastoCollection implements Iterable{
         return instance;
     }
     
+    /**
+     * Llamada al DAOFactory y su setList correspondiente. Crea una lista a partir de los datos de la base de datos.
+     */
     public static void setList() {
         getInstance().lista = DAOFactory.getGastoDAO().getList();
     }
+    
+    
     public static void setList(List<Gasto> l) {
         getInstance().lista = l;
     }
